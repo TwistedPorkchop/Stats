@@ -1,5 +1,6 @@
 from cmath import sqrt
 import statistics as stats
+import scipy.stats as st
 
 ############################################
 def EpsilonC(p, pe, n):
@@ -54,30 +55,42 @@ def Conformity(Ti, Oi):
 ##############################################
 def HomInde(Oij):
         
-        SumR = []
-        SumC = []
+    SumR = []
+    SumC = []
+
+    for r in Oij:
+        for i in range(Rows):
+            SumR.append(sum(r))
+        for c in r:
+            for j in range(len(Oij[0])):
+                SumC.append(c)
+            
+    Tij = [[]*len(Oij[0])]*Rows
     
-        for r in Oij:
-            for i in range(Rows):
-                SumR.append(sum(r))
-            for c in r:
-                for j in range(len(Oij[0])):
-                    SumC.append(c)
-                
-        Tij = [[]*len(Oij[0])]*Rows
-        
-        
-        for r in range(Rows):
-            for c in range(len(Oij[0])):
-                Tij[r].append(SumR[r]*SumC[c]/sum(SumC))
-                
-        Chi = 0
-        for r in range(Rows):
-            for c in range(len(Oij[0])):
-                Chi += (Tij[r][c] - Oij[r][c])**2 /Tij[r][c]
-                
-        print(Chi)
     
+    for r in range(Rows):
+        for c in range(len(Oij[0])):
+            Tij[r].append(SumR[r]*SumC[c]/sum(SumC))
+            
+    Chi = 0
+    for r in range(Rows):
+        for c in range(len(Oij[0])):
+            Chi += (Tij[r][c] - Oij[r][c])**2 /Tij[r][c]
+            
+    print(Chi)
+    
+##############################################
+def SSquare(n, xarr, xarr2):
+
+    xbar = xarr/n
+
+    s2 = xarr2/n - xbar**2
+
+    print("s² = " + s2)
+    print(st.norm.ppf(s2))
+
+    return s2
+
 ##############################################
     
 ##################################################################################################################################
@@ -228,3 +241,14 @@ if form == 7:
             else :
                 i+=1
     HomInde(Oij)
+
+#SSquare
+if form == 8:
+    print("n =")
+    n = int(input())
+    print("Sum xi =")
+    xarr = float(input())
+    print("Sum xi² =")
+    xarr2 = float(input())
+
+    SSquare(n, xarr, xarr2)
