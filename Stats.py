@@ -118,9 +118,9 @@ def Adjustment(Ei, Oi):
     result = 0
 
     for i in range(len(Oi)):
-        result += ((Oi[i] - Ei[i])**2)/Ei
+        result += ((Oi[i] - Ei[i])**2)/Ei[i]
     
-    print("Chi")
+    print(f"Chi² = {result}")
 ##############################################
 def SSquare(n, xarr, xarr2, mu):
 
