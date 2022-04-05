@@ -60,6 +60,7 @@ def mysum(a, b):
         
     return result
 
+#############################################
 def NormDis(ArrMean, SD):
     
     print(stats.NormalDist(ArrMean, SD))
@@ -111,7 +112,15 @@ def HomInde(Oij):
             Chi += (Tij[r][c] - Oij[r][c])**2 /Tij[r][c]
             
     print(Chi)
+##############################################
+def Adjustment(Ei, Oi):
+
+    result = 0
+
+    for i in range(len(Oi)):
+        result += ((Oi[i] - Ei[i])**2)/Ei
     
+    print("Chi")
 ##############################################
 def SSquare(n, xarr, xarr2, mu):
 
@@ -432,6 +441,39 @@ if form == 14:
     print("Look at the Z-Value table for the confidence interval")
     
 #Adjustment Chi
+if form == 15:
+
+    print("Expected values (-1when done)")
+    
+    Ei = []
+    
+    i = 0
+    while True :
+        Ei.append(float(input()))
+        
+        if Ei[i] < 0 :
+            Ei.pop()
+            break;
+        
+        else :
+            i+=1
+
+    print("Observed values (-1when done)")
+    
+    Oi = []
+    
+    i = 0
+    while True :
+        Oi.append(float(input()))
+        
+        if Oi[i] < 0 :
+            Oi.pop()
+            break;
+        
+        else :
+            i+=1
+
+    Adjustment(Ei, Oi)
 
 #Ei
 if form == 16:
